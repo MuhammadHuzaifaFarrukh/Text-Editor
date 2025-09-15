@@ -18,10 +18,8 @@ Delete Some Contents: Find and delete a specific word or phrase from a file.
 Exit: Terminate the program.
 
 How to Use
-1. Compile the Code: Compile the Text Editor.cpp file using a C++ compiler. For example :
-g++ "Text Editor.cpp" -o text_editor
+1. Compile the Code: Compile the Text Editor.cpp file using a C++ compiler
 2. Run the Executable: Execute the compiled file from your terminal.
-./text_editor
 3. Follow the Menu: The program will present a main menu with options. Enter the number corresponding to your desired action and follow the on-screen prompts.
 
 File Structure
