@@ -78,16 +78,24 @@ void menu(int msg)
         getline(cin, filename);
         ofstream myfile( (filename+".txt"));
 
-
         myfile.close();
         menu(1);
-        //cin>>choice;
     }
     if(choice==2)
     {
         text="";
         cout<<endl<<"Enter name of file: ";
         cin>>filename;
+
+
+        //Something will be added in file only if it is created first or exists already
+        ifstream mfile((filename+".txt") );
+        if(!mfile)
+        {
+            menu(55); //Something will be added in file only if it is created first or exists already
+        }
+        mfile.close();
+
         cout<<endl<<"Enter text to write to file: (Enter END to complete)"<<endl;
         ofstream myfile;
         myfile.open((filename+".txt"),ios::app);
@@ -113,10 +121,10 @@ void menu(int msg)
                 text += line+"\n";
             }
         }
+
         myfile<<text;
         myfile.close();
         menu(2);
-        //cin>>choice;
     }
     if(choice==3)
     {
@@ -134,30 +142,49 @@ void menu(int msg)
         {
             cout << text << "\n";
         }
+
+        //Use this to check file's fail bit
+        /*
+        if(myfile.fail())
+        {
+            cout<<"Failure"<<endl;
+        }
+        */
+        //Use this to clear file's fail bit to be normal :
+        myfile.clear();
+
+
         myfile.close();
         char now;
         cout<<endl<<"End of File. Press any key for main menu: ";
         cin>>now;
         menu(2);
-        //cin>>choice;
+
     }
     if(choice==4)
     {
         cout<<endl<<"Enter name of file: ";
         cin>>filename;
+
+        //The File will be erased only if it exists
+        ifstream mfile((filename+".txt") );
+        if(!mfile)
+        {
+            menu(55); //The File will be erased only if it exists
+        }
+        mfile.close();
+
         ofstream myfile;
         myfile.open((filename+".txt"));
         myfile<<"";
         myfile.close();
         menu(4);
-        cin>>choice;
-        //cin>>choice;
     }
     if(choice==5)
     {
         cout<<endl<<"Enter name of file: ";
         cin>>filename;
-        if (remove((filename+".txt").c_str())==0) // Here .c_str() is necessary as .remove() takes a const char * whereas for opening file , string can also work //
+        if (remove((filename+".txt").c_str())==0) // Here .c_str() is necessary as .remove() takes a const char * whereas for opening file , string can also work like //
         {
             menu(5);
         }
@@ -182,7 +209,19 @@ void menu(int msg)
         {
             text += line+"\n";
         }
+
+        //Use this to check file's fail bit
+        /*
+        if(myfile.fail())
+        {
+            cout<<"Failure"<<endl;
+        }
+        */
+        //Use this to clear file's fail bit to be normal :
+        myfile.clear();
         myfile.close();
+
+        //Here the file in which copied contents will be written , doesn't necessarily need to exist
         cout<<endl<<"Enter name of file to copy to: ";
         string second;
         getline(cin, second);
@@ -190,12 +229,10 @@ void menu(int msg)
         myfile2.open((second+".txt"),ios::app);
         myfile2<<text;
         myfile2.close();
-        menu(6);
-        //cin>>choice;
+
     }
     if(choice==7)
     {
-
         cout<<endl<<"Enter name of file to delete something from: ";
 
         cin.ignore();
@@ -215,11 +252,22 @@ void menu(int msg)
         {
             fileContent += line + "\n";
         }
+
+        //Use this to check file's fail bit
+        /*
+        if(myfile.fail())
+        {
+            cout<<"Failure"<<endl;
+        }
+        */
+        //Use this to clear file's fail bit to be normal :
+        myfile.clear();
+
         myfile.close();
 
         // Step 2: Modify the content in memory
         cout<<endl<<"Write text what you want to remove from your file: ";
-        string toRemove ;
+        string toRemove;
         cin>>toRemove;
         size_t pos = fileContent.find(toRemove);
         if (pos != string::npos)
@@ -237,7 +285,6 @@ void menu(int msg)
         outFile << fileContent;
         outFile.close();
         menu(7);
-        //cin>>choice;
     }
     if(choice==8)
     {
