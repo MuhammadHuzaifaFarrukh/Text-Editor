@@ -14,7 +14,7 @@ int main()
     return 0;
 }
 
-//Menu Based Function
+//Menu Based Function :
 void menu(int msg)
 {
     system("CLS");
