@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include <string>
+#include <string>   //For getline() Function
 
 using namespace std;
 
